@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Search Results{% endblock title %}
+
+{% block content %}
+    <h2>Search Results for "{{ query }}"</h2>
+    {% for movie in search_results  %}
+    <div class="col-md-4 movie-preview">
+      <a href="#" class="mask">
+        <img src="{{movie.poster_url}}" class="img-responsive zoom-img" alt={{movie.title}} style="width:100%; height:300px;" />
+        <div class="m-movie-title">
+          <a class="m-movie-link" href="#">{{movie.title}}</a>
+          <div class="clearfix"></div>
+          <div class="m-r-date">
+            <p><i class="fa fa-calendar-o"></i>{{movie.release_date}}</p>
+            <form action="{% url 'movies:book_ticket' movie.title %}" method="post">
+              {% csrf_token %}
+              <input type="text" hidden value="{{movie.title}}" name="movie_name">
+              <button type="submit">BUY TICKETS</button>
+          </form>
+          </div>
+          <div class="m-r-like">
+            <i class="fa fa-thumbs-up"></i>
+            <p>rocking</p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+    {% if search_results %}
+    {% else %}
+    <p>No movies found for your search query.</p>
+    {% endif %}
+    {% endblock content %}
+    
+   

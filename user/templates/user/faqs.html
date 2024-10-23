@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block title %}FAQs{% endblock title %}
+{% block script %}{% endblock script %}
+{% block content %}
+<div class="faq">
+  <h3>Welcome to Movie Ticket Help</h3>
+  <div class="faqs">
+                   <h3 class="event-tab-head">Faq's</h3>
+                 <div class="tab1">
+            <ul class="place">
+              <li>Q.Placerat ligula tincidunt</li>
+            </ul>
+          <p class="ans" style="display: none;">A.Duis aute irure dolor in reprehenderit Lorem Ipsum is simply dummy Duis aute irure dolor in reprehenderit Lorem Ipsum is simply dummy  tDuis aute irure dolor in reprehenderit Lorem Ipsum is simply dummy  eDuis aute irure dolor in reprehenderit Lorem Ipsum is simply dummy xt of the printing and typesetting industry.in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+          </div>
+          <div class="tab2">
+            <ul class="place">
+              <li>Q.Sed ut perspiciatis unde</li>
+            </ul>
+          <p class="ans" style="display: none;">A.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non Duis aute irure dolor in reprehenderit Lorem Ipsum is simply dummy  Duis aute irure dolor in reprehenderit Lorem Ipsum is simply dummy  proident.</p>
+          </div>
+          <div class="tab3">
+            <ul class="place">
+              <li>Q.Eaque ipsa quae ab illo </li>
+            </ul>
+          <p class="ans" style="display: none;">A.Duis aute irure dolor in reprehenderit Lorem Ipsum is simply dummy  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+          </div>
+          
+          <div class="tab4">
+            <ul class="place">
+              <li>Q.Eaque ipsa quae ab illo </li>
+            </ul>
+          <p class="ans" style="display: none;">A.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu Lorem Ipsum is simply dummy text of the printing and typesetting industry.fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+          </div>
+          <div class="tab5">
+            <ul class="place">
+              <li>Q.Eaque ipsa quae ab illo </li>
+            </ul>
+          <p class="ans" style="display: none;">A.Duis Duis aute irure dolor in reprehenderit Lorem Ipsum is simply dummy  aute irure dolor in reprehenderit in voluptate velit Lorem Ipsum is simply dummy text of the printing and typesetting industry.esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+          </div>
+          <div class="tab6">
+            <ul class="place">
+              <li>Q.Eaque ipsa quae ab illo </li>
+            </ul>
+          <p class="ans" style="display: none;">A.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+          </div>
+          <div class="tab7">
+            <ul class="place">
+              <li>Q.Eaque ipsa quae ab illo </li>
+            </ul>
+          <p class="ans" style="display: none;">A.Duis Duis aute irure dolor in reprehenderit Lorem Ipsum is simply dummy  Duis aute irure dolor in reprehenderit Lorem Ipsum is simply dummy  Duis aute irure dolor in reprehenderit Lorem Ipsum is simply dummy aute irure dolor in reprehenderit in voluptate velit esse Lorem Ipsum is simply dummy text of the printing and typesetting industry.cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+          </div>
+          
+          <a class="c-c-c" href="contact.html">contact-us</a>
+          <!--script-->
+          <script>
+            $(document).ready(function(){
+              $(".tab1 p").hide();
+              $(".tab2 p").hide();
+              $(".tab3 p").hide();
+              $(".tab4 p").hide();
+              $(".tab5 p").hide();
+              $(".tab6 p").hide();
+              $(".tab7 p").hide();
+              $(".tab1 ul").click(function(){
+                $(".tab1 p").slideToggle(300);
+                $(".tab7 p").hide();
+                $(".tab6 p").hide();
+                $(".tab5 p").hide();
+                $(".tab2 p").hide();
+                $(".tab3 p").hide();
+                $(".tab4 p").hide();
+              })
+              $(".tab2 ul").click(function(){
+                $(".tab2 p").slideToggle(300);
+                $(".tab7 p").hide();
+                $(".tab6 p").hide();
+                $(".tab5 p").hide();
+                $(".tab1 p").hide();
+                $(".tab3 p").hide();
+                $(".tab4 p").hide();
+              })
+              $(".tab3 ul").click(function(){
+                $(".tab3 p").slideToggle(300);
+                $(".tab7 p").hide();
+                $(".tab6 p").hide();
+                $(".tab5 p").hide();
+                $(".tab4 p").hide();
+                $(".tab2 p").hide();
+                $(".tab1 p").hide();
+              })
+              $(".tab4 ul").click(function(){
+                $(".tab4 p").slideToggle(300);
+                $(".tab7 p").hide();
+                $(".tab6 p").hide();
+                $(".tab5 p").hide();
+                $(".tab3 p").hide();
+                $(".tab2 p").hide();
+                $(".tab1 p").hide();
+              })	
+              $(".tab5 ul").click(function(){
+                $(".tab5 p").slideToggle(300);
+                $(".tab7 p").hide();
+                $(".tab6 p").hide();
+                $(".tab4 p").hide();
+                $(".tab3 p").hide();
+                $(".tab2 p").hide();
+                $(".tab1 p").hide();
+              })	
+              $(".tab6 ul").click(function(){
+                $(".tab6 p").slideToggle(300);
+                $(".tab7 p").hide();
+                $(".tab5 p").hide();
+                $(".tab4 p").hide();
+                $(".tab3 p").hide();
+                $(".tab2 p").hide();
+                $(".tab1 p").hide();
+              })	
+              $(".tab7 ul").click(function(){
+                $(".tab7 p").slideToggle(300);
+                $(".tab6 p").hide();
+                $(".tab5 p").hide();
+                $(".tab4 p").hide();
+                $(".tab3 p").hide();
+                $(".tab2 p").hide();
+                $(".tab1 p").hide();
+              })	
+            });
+          </script>
+          <!-- script -->
+          </div>
+</div>
+{% endblock content %}

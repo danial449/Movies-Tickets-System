@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Contact{% endblock title %}
+{% block script %}{% endblock script %}
+{% block content %}
+<ol class="breadcrumb">
+  <li><a href="index.html">Home</a></li>
+  <li class="active">Contact</li>
+</ol>
+
+<div class="contact">
+  <h3>Contact Us</h3>
+      <!--Message Start-->
+      {% if messages %}
+      {% for message in messages  %}
+        <p>{{message}}</p>
+      </div>
+      {% endfor %}
+      {% endif %}
+      <!--Message End-->
+  <p class="love"> We love to here from you</p>
+  <div class="contact-form">
+    <div class="col-md-6 contact-grid">
+      <form action="" method="post">
+        {% csrf_token %}
+        <p class="your-para">Your Name:</p>
+        <input type="text" value="" onfocus="this.value='';" name="first_name" onblur="if (this.value == '') {this.value ='';}">
+        <p class="your-para">Your Mail:</p>
+        <input type="text" value="" onfocus="this.value='';" name="email" onblur="if (this.value == '') {this.value ='';}">
+        <p class="your-para">Your Message:</p>
+        <textarea cols="77" rows="6" onfocus="this.value='';"
+          onblur="if (this.value == '') {this.value = '';}" name="message"></textarea>
+        <div class="send">
+          <input type="submit" value="Send">
+        </div>
+      </form>
+    </div>
+    <div class="col-md-6 contact-in">
+      <p class="sed-para"> Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor.</p>
+      <p class="para1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+        anim id est laborum.Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
+        of classical Latin literature from 45 BC, making it over 2000 years old. </p>
+      <div class="more-address">
+        <div class="address-more">
+          <p>My company name,</p>
+          <p>Lorem ipsum dolor,</p>
+          <p>Jasmin Dr 40 Fe 72. </p>
+        </div>
+        <div class="address-left">
+          <p>Tel:1115550001</p>
+          <p>Fax:190-4509-494</p>
+          <p><a href="mailto:info@example.com">mail@example.com</a></p>
+        </div>
+        <div class="clearfix"> </div>
+      </div>
+    </div>
+    <div class="clearfix"> </div>
+  </div>
+  <h4>our location</h4>
+  <div class="c-map">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d204255.13749772237!2d-100.04030506193968!3d36.87870769529681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sUnited+States!5e0!3m2!1sen!2sin!4v1435833871011"
+      frameborder="0" style="border:0" allowfullscreen></iframe>
+  </div>
+</div>
+</div>
+{% endblock content %}

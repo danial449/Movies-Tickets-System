@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Blog{% endblock title %}
+{% block script %}{% endblock script %}
+{% block content %}
+<div class="blog-section">
+  <div class="col-md-12 blog-posts">
+    <h3 class="post">Latest Posts</h3>
+    <div class="blog-top">
+      {% for post in posts %}
+      <div class="col-md-4 grid_3">
+        <!-- Check if the post has an associated image -->
+        {% if post.post_image %}
+          <a href="{% url 'blogs:post_details' post.pk %}">
+            <img src="{{ post.post_image.url }}" class="img-responsive" alt="">
+          </a>
+        {% else %}
+          <!-- Display a placeholder or default image when there's no post image -->
+          <a href="{% url 'blogs:post_details' post.pk %}">
+            <img src="{% static 'path/to/default_image.jpg' %}" class="img-responsive" alt="No Image Available">
+          </a>
+        {% endif %}
+        
+        <div class="blog-poast-info">
+          <ul>
+            <li><i class="fa fa-user"></i><a class="admin" href="#"><span> </span>{{ post.author }}</a></li>
+            <li><i class="fa fa-calendar"></i><span> </span>{{ post.published_date }}</li>
+            <li><i class="fa fa-comments"></i><a class="p-blog" href="#"><span> </span>{{ post.comments.all|length }}</a></li>
+          </ul>
+        </div>
+        <h3><a href="{% url 'blogs:post_details' post.pk %}">{{ post.title }}</a></h3>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+{% endblock content %}

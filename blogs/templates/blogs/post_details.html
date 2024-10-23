@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{post.title}}{% endblock title %}
+{% block content %}
+{% if messages %}
+{% for message in messages  %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <i class="fa fa-check-circle" aria-hidden="true"></i> {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+<!--Message End-->
+<ol class="breadcrumb">
+  <li><a href="index.html">Home</a></li>
+  <li class="active">{{post.title}}</li>
+</ol>
+<!--Message Start-->
+<div class="blog-section">
+<div class="col-md-8 blog-posts">
+<h3 class="post">{{post.title}}</h3>
+  <div class="last-article">
+    <p class="artext">{{post.text | safe}}</p>
+
+    <div class="clearfix"></div>
+    <div class="comments">
+      <h5>Comments</h5>
+      <div class="comment">
+        <div class="client ">
+          {% if comments %}
+          {% for comments in comments %}
+          <img src="https://linguistics.ucla.edu/wp-content/uploads/2020/06/placeholder-300x248.jpg" alt="">
+          
+          {% endfor %}
+          {% endif %}
+        </div>
+        <div class="client-message">
+          {% if comments %}
+          {% for comment in comments  %}
+          <p><a href="#">{{comment.author}}</a><i class="fa fa-calendar"></i>{{comment.created_date|date:"j F, Y"}}</p>
+          <h6>{{comment.text}}</h6>
+          {% endfor %}
+          {% endif %}
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      
+      <form action="" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="user" value="{{ request.user.id }}">
+        <input type="hidden" name="service" value="{{ service.id }}">
+        <textarea type="text" name="text" required="" placeholder="Your comment..."></textarea>
+        <div class="col-12">
+          {% if user.is_authenticated %}
+          <button class="btn btn-primary w-100 py-3 mt-3" type="submit">Submit</button>
+          {% else %}
+          <p>Please login to make a comment!</p> <br>
+          <button class="btn btn-primary w-100 py-3 mt-3 disabled" type="submit">Submit</button>
+          {% endif %}
+          
+      </div>
+      </form>
+    
+  </div>
+  <div class="clearfix"></div>
+</div>
+</div>
+<div class="col-md-4 blog-categories">
+<h3 class="post">Categories</h3>
+{% for post in recent_post  %}
+<p><a href="{% url 'blogs:post_details' post.pk%}">{{post.title}}</a> ({{ post.comments.all|length }})</p>
+{% endfor %}
+</div>
+  <div class="clearfix"></div>
+</div>
+{% endblock content %}

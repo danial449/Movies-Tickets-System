@@ -1,0 +1,271 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Movies{% endblock title %}
+{% block script %}
+	<!---- start-smoth-scrolling---->
+	<script type="text/javascript" src="js/move-top.js"></script>
+	<script type="text/javascript" src="js/easing.js"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function ($) {
+			$(".scroll").click(function (event) {
+				event.preventDefault();
+				$('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1200);
+			});
+		});
+	</script>
+	<!---- start-smoth-scrolling---->
+	<script src="js/responsiveslides.min.js"></script>
+	<script>
+		$(function () {
+			$("#slider").responsiveSlides({
+				auto: true,
+				speed: 500,
+				namespace: "callbacks",
+				pager: true,
+			});
+		});
+	</script>
+  <script src="{% static "js/easyResponsiveTabs.js" %}" type="text/javascript"></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#horizontalTab').easyResponsiveTabs({
+      type: 'default', //Types: default, vertical, accordion           
+      width: 'auto', //auto or any width like 600px
+      fit: true   // 100% fit in a container
+    });
+  });
+</script>
+{% endblock script %}
+{% block content %}
+<div class="main-banner">
+  <div class="banner col-md-8">
+    <section class="slider">
+      <div class="flexslider">
+        <ul class="slides">
+          <li>
+            <img src="https://images.indianexpress.com/2024/06/MixCollage-28-Jun-2024-02-46-PM-1876_e52dcb.jpg?w=640" class="img-responsive" alt="" />
+          </li>
+          <li>
+            <img src="https://e0.pxfuel.com/wallpapers/351/606/desktop-wallpaper-hollywood-movies-action-movie.jpg" class="img-responsive" alt="" />
+          </li>
+          <li>
+            <img src="https://c4.wallpaperflare.com/wallpaper/558/910/431/exists-horror-movie-wallpaper-preview.jpg" class="img-responsive" alt="" />
+          </li>
+          <li>
+            <img src="https://3.bp.blogspot.com/-5ef4y96dZX4/UOwfJwIuZpI/AAAAAAAAB9M/Dnn7G7ZExps/s1600/TheLastStand+2013+hollywood+Movie+Poster.jpg" class="img-responsive" alt="" />
+          </li>
+        </ul>
+      </div>
+    </section>
+    <!-- FlexSlider -->
+    <script defer src="{% static "js/jquery.flexslider.js" %}"></script>
+    <link rel="stylesheet" href={% static "css/flexslider.css" %} type="text/css" media="screen" />
+    <script type="text/javascript">
+      $(function () {
+        SyntaxHighlighter.all();
+      });
+      $(window).load(function () {
+        $('.flexslider').flexslider({
+          animation: "slide",
+          start: function (slider) {
+            $('body').removeClass('loading');
+          }
+        });
+      });
+    </script>
+  </div>
+  <div class="col-md-4 banner-right">
+    <div class="slider1">
+      <div class="callbacks_container">
+        <ul class="rslides" id="slider">
+          <li>
+            <iframe src="https://www.youtube.com/embed/c3Fg4yjwc0A" frameborder="0" allowfullscreen></iframe>
+          </li>
+          <li>
+            <iframe src="https://www.youtube.com/embed/HyIyd9joTTc?si=8NCaAd4X2HkA4Dsy" frameborder="0" allowfullscreen></iframe>
+          </li>
+          <li>
+            <iframe src="https://www.youtube.com/embed/v-94Snw-H4o?si=Wr3iFvyana4vqfDF" frameborder="0" allowfullscreen></iframe>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script src="{% static 'js/responsiveslides.min.js' %}"></script>
+    <script>
+      $(function () {
+        $("#slider").responsiveSlides({
+          auto: true,
+          nav: false,
+          speed: 500,
+          namespace: "callbacks",
+          pager: false,
+        });
+      });
+      
+    </script>
+
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="now-showing-movies">
+  <h3 class="m-head">Now Showing</h3>
+  {% for movie in movies  %}
+  <div class="col-md-4 movie-preview">
+    <a href="{% url 'movies:single_movie' movie.id 'popular' %}" class="mask">
+      <img src="{{movie.poster_url}}" class="img-responsive zoom-img" alt={{movie.title}} style="width:100%; height:300px;" />
+      <div class="m-movie-title">
+        <a class="m-movie-link" href="{% url 'movies:single_movie' movie.id 'popular' %}">{{movie.title}}</a>
+        <div class="clearfix"></div>
+        <div class="m-r-date">
+          <p><i class="fa fa-calendar-o"></i>{{movie.release_date}}</p>
+          <form action="{% url 'movies:book_ticket' movie.title %}" method="post">
+            {% csrf_token %}
+            <input type="text" hidden value="{{movie.title}}" name="movie_name">
+            <button type="submit">BUY TICKETS</button>
+        </form>
+        </div>
+        <div class="m-r-like">
+          <i class="fa fa-thumbs-up"></i>
+          <p>rocking</p>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+  <div class="clearfix"></div>
+</div>
+<div class="now-showing-movies">
+  <h3 class="m-head">Next Change & Coming Soon</h3>
+  {% for movie in upcoming_movies|slice:':6'  %}
+  <div class="col-md-4 movie-preview">
+    <a href="{% url 'movies:single_movie' movie.id 'upcoming' %}" class="mask">
+      <img src="{{movie.poster_url}}" class="img-responsive zoom-img" alt="{{movie.title}}" style="width:100%; height:300px;"/>
+      <div class="m-movie-title">
+        <a class="m-movie-link" href="{% url 'movies:single_movie' movie.id 'upcoming' %}">{{movie.title}}</a>
+        <div class="clearfix"></div>
+        <div class="m-r-date">
+          <p><i class="fa fa-calendar-o"></i>{{movie.release_date}}</p>
+        </div>  
+        <div class="clearfix"></div>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+  <div class="clearfix"></div>
+</div>
+
+<div class="footer-top-grid">
+  <div class="list-of-movies col-md-8">
+    <div class="tabs">
+      <div class="sap_tabs">
+        <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
+          <ul class="resp-tabs-list">
+            <li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span>Now Playing</span></li>
+            <li class="resp-tab-item" aria-controls="tab_item-2" role="tab"><span>Comming Soon</span></li>
+            <div class="clearfix"></div>
+          </ul>
+          <div class="resp-tabs-container">
+            <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
+              <ul class="tab_img">
+                {% for movie in now_playing_movies|slice:":3" %}
+                <li>
+                  <div class="view view-first">
+                    <a href="{% url 'movies:single_movie' movie.id 'now_playing' %}"> <img src="{{movie.poster_url}}" class="img-responsive"
+                        alt="" /></a>
+                    <div class="info1"> </div>
+                    <div class="mask">
+                    </div>
+                    <div class="tab_desc">
+                      <form action="{% url 'movies:book_ticket' movie.title %}" method="post">
+                        {% csrf_token %}
+                        <input type="text" hidden value="{{movie.title}}" name="movie_name">
+                        <button type="submit">BUY TICKETS</button>
+                    </form>
+                    </div>
+                  </div>
+                </li>
+                {% endfor %}
+                <div class="clearfix"></div>
+              </ul>
+            </div>
+            <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-2">
+              <ul class="tab_img">
+                {% for movie in upcoming_movies|slice:":3" %}
+                <li>
+                  <div class="view view-first">
+                    <a href="{% url 'movies:single_movie' movie.id 'upcoming' %}"> <img src="{{movie.poster_url}}" class="img-responsive"
+                        alt="" /></a>
+                    <div class="info1"> </div>
+                    <div class="mask">
+                    </div>
+                    <div class="tab_desc">
+                    </div>
+                  </div>
+                </li>
+                {% endfor %}
+                <div class="clearfix"></div>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="featured">
+      <h4>Top Rated</h4>
+      <ul>
+        {% for movie in top_rated_movies|slice:":6" %}
+        <li>
+          <div class="f-movie">
+            <div class="f-movie-img">
+              <a href="{% url 'movies:single_movie' movie.id 'top_rated' %}"><img src="{{movie.poster_url}}" alt="" /></a>
+            </div>
+            <div class="f-movie-name">
+              <a href="{% url 'movies:single_movie' movie.id 'top_rated' %}">{{movie.title}}</a>
+              <p><i class="fa fa-calendar-o"></i>{{movie.release_date}}</p>
+            </div>
+            <div class="f-buy-tickets">
+              <form action="{% url 'movies:book_ticket' movie.title %}" method="post">
+                {% csrf_token %}
+                <input type="text" hidden value="{{movie.title}}" name="movie_name">
+                <button type="submit">BUY TICKETS</button>
+              </form>
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+        <div class="clearfix"></div>
+      </ul>
+    </div>
+  </div>
+  <div class="right-side-bar">
+    <div class="top-movies-in-india">
+      <h4>Top Movies</h4>
+      {% for movie in top_rated_movies|slice:":12"  %}
+      <ul class="mov_list">
+        <li><i class="fa fa-star"></i></li>
+        <li>100%</li>
+        <li><a href="{% url 'movies:single_movie' movie.id 'top_rated' %}">{{movie.title}}</a></li>
+      </ul>
+      {% endfor %}
+    </div>
+    <div class="quick-pay">
+      <h3>Quick Pay</h3>
+      <p class="payText">Make your online payments a breeze. Save your Credit, Debit card and Netbanking in your
+        BookMyShow profile.. <a href="#">Read more</a></p>
+    </div>
+    <div class="our-blog">
+      <h5>Our Blog</h5>
+      {% for blog in blogs  %}
+      <div class="post-article">
+        <a href="{% url 'blogs:post_details' blog.pk %}" class="post-title">{{blog.title}}</a>
+        <i>{{blog.published_date}}</i>
+        <p>{{blog.text|safe}}<br> <a href="{% url 'blogs:post_details' blog.pk %}">Read more</a></p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+{% endblock content %}

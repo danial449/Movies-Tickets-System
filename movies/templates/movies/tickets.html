@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Tickets{% endblock title %}
+{% block content %}
+<div class="table-block">
+  {% if tickets %}
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Due Date</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Seat no</th>
+        <th scope="col">Payment Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ticket in tickets %}
+      <tr>
+        <td>{{ticket.movie_name}}</td>
+        <td>{{ticket.booking_date}}</td>
+        <td>${{ticket.amount}}</td>
+        <td>{{ticket.seat_no}}</td>
+        <td>
+          {% if ticket.payment_status %}
+            Verified
+          {% else %}
+          <form action="{% url 'movies:payment' ticket.id %}" method="get">
+          <button type="submit">Pay</button>
+          </form>
+
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+    <p>No Tickets Booked</p> <!-- Display if no tickets found -->
+  {% endif %}
+</div>
+{% endblock content %}

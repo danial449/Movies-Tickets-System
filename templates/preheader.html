@@ -1,0 +1,54 @@
+<div class="header">
+  <div class="logo">
+    <a href={% url "user:home" %}>
+      <h1>Movies Ticket</h1>
+    </a>
+  </div>
+  <div class="search">
+    <div class="search2">
+      <form method="GET" action="{% url 'movies:movie_search' %}">
+        <i class="fa fa-search"></i>
+        <input type="text" name="query" placeholder="Search for a movie"
+          onfocus="this.value = '';"
+          onblur="if (this.value == '') {this.value = 'Search for a movie';}" />
+    </form>   
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="bootstrap_container">
+  <nav class="navbar navbar-default w3_megamenu" role="navigation">
+    <div class="navbar-header">
+      <button type="button" data-toggle="collapse" data-target="#defaultmenu"
+        class="navbar-toggle"><span class="icon-bar"></span><span class="icon-bar"></span><span
+          class="icon-bar"></span></button><a href={% url "user:home" %} class="navbar-brand"><i
+          class="fa fa-home"></i></a>
+    </div><!-- end navbar-header -->
+
+    <div id="defaultmenu" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href={% url "user:home" %}>Home</a></li>
+        <!-- Mega Menu -->
+        <li ><a href={% url "movies:movie" %}>Movies</a>
+        </li>
+        <li><a href={% url "user:about" %}>About</a></li>
+        <li><a href={% url "blogs:blog" %}>Blog</a></li>
+        <li><a href={% url "user:faqs" %}>FAQs</a></li>
+        {% if user.is_authenticated %}
+        <li><a href={% url "movies:ticket" %}>Your Tickets</a></li>
+        {% endif %}
+        <li><a href={% url "user:contact" %}>Contact us</a></li>
+        <!-- end standard drop down -->
+        <!-- end dropdown w3_megamenu-fw -->
+      </ul><!-- end nav navbar-nav -->
+
+      {% if user.is_authenticated %}
+      <ul class="nav navbar-nav navbar-right">
+        <li ><a href="{% url 'user:logout' %}" class="">Logout</a>
+        </li>
+      </ul>
+      {% endif %}<!-- end nav navbar-nav navbar-right -->
+    </div><!-- end #navbar-collapse-1 -->
+
+  </nav><!-- end navbar navbar-default w3_megamenu -->
+</div>
